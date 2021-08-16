@@ -4,12 +4,12 @@ Retrieving user repositories with Dio package.
 ## For developers
 > To clone locally
 ```
-$ git clone git@github.com:luciano01/todo.git
-$ cd todo
+$ git clone git@github.com:luciano01/github_api.git
+$ cd github_api
 ```
 > Open the project in an editor, if you use VS Code, follow this
 ```
-$ cd todo
+$ cd github_api
 $ code .
 ```
 
