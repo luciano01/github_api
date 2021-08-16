@@ -31,7 +31,6 @@ class RepositoryModel {
       );
 
   static List<RepositoryModel>? fromJsonList(List list) {
-    if (list == null) return null;
     return list.map((item) => RepositoryModel.fromJson(item)).toList();
   }
 

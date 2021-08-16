@@ -31,7 +31,6 @@ class OwnerModel {
       );
 
   static List<OwnerModel>? fromJsonList(List list) {
-    if (list == null) return null;
     return list.map((item) => OwnerModel.fromJson(item)).toList();
   }
 
