@@ -1,3 +1,4 @@
+import 'package:github_api/app/shared/repository/app_repository_interface.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_store.g.dart';
@@ -5,10 +6,17 @@ part 'home_store.g.dart';
 class HomeStore = HomeStoreBase with _$HomeStore;
 
 abstract class HomeStoreBase with Store {
-  @observable
-  int counter = 0;
+  final IAppRepository _repository;
 
-  Future<void> increment() async {
-    counter = counter + 1;
+  HomeStoreBase(this._repository) {
+    getRepositories();
+  }
+
+  @observable
+  ObservableFuture listOfRepositories = ObservableFuture.value([]);
+
+  @action
+  getRepositories({String? user}) async {
+    listOfRepositories = _repository.getRepositories(user: user).asObservable();
   }
 }
