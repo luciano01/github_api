@@ -16,13 +16,13 @@ class AppTextStyles {
   );
 
   static final TextStyle userTitle = GoogleFonts.openSans(
-    color: AppColors.appBarColor,
+    color: AppColors.white,
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
 
   static final TextStyle userSubtitle = GoogleFonts.openSans(
-    color: AppColors.slateGrey,
+    color: AppColors.white,
     fontSize: 14,
     fontWeight: FontWeight.normal,
   );
@@ -42,6 +42,12 @@ class AppTextStyles {
   static final TextStyle tabQuantity = GoogleFonts.openSans(
     color: AppColors.slateGrey,
     fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
+
+  static final TextStyle bottomSheetTitle = GoogleFonts.openSans(
+    color: AppColors.slateGrey,
+    fontSize: 18,
     fontWeight: FontWeight.bold,
   );
 }

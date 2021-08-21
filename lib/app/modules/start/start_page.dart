@@ -1,7 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:github_api/app/modules/start/pages/repos_page.dart';
+import 'package:github_api/app/modules/start/pages/starred_page.dart';
 import 'package:github_api/app/modules/start/start_store.dart';
 import 'package:flutter/material.dart';
 import 'package:github_api/app/shared/utils/app_colors.dart';
+import 'package:github_api/app/shared/utils/app_constants.dart';
 import 'package:github_api/app/shared/utils/app_images.dart';
 import 'package:github_api/app/shared/utils/app_text_styles.dart';
 
@@ -15,7 +18,7 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
   final StartStore store = Modular.get();
 
   TabController? _tabController;
-  int selectedIndex = 0;
+  int currentIndex = 0;
 
   @override
   void dispose() {
@@ -26,7 +29,7 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
   @override
   void initState() {
     _tabController = TabController(
-      initialIndex: selectedIndex,
+      initialIndex: currentIndex,
       length: 2,
       vsync: this,
     );
@@ -39,6 +42,7 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
       backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.appBarColor,
+        elevation: 0,
         title: Row(
           children: [
             Image.asset(AppImages.github, width: 30),
@@ -48,37 +52,82 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
           ],
         ),
       ),
-      body: ListView(
+      floatingActionButton: FloatingActionButton(
+        mini: true,
+        child: Icon(Icons.search),
+        onPressed: () {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) {
+              return Container(
+                padding: MediaQuery.of(context).viewInsets,
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(32),
+                    topRight: Radius.circular(32),
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                  child: Wrap(
+                    children: [
+                      Center(
+                        child: Text(
+                          AppConstants.bottomSheetTitle,
+                          style: AppTextStyles.bottomSheetTitle,
+                        ),
+                      ),
+                      SizedBox(height: 40),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                hintText: AppConstants.textFormFieldHintText,
+                                prefixIcon: Icon(Icons.person),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 15),
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(),
+                            icon: Icon(Icons.send),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      body: Column(
         children: [
-          textFormField(),
           userInfor(),
           tabBar(_tabController!, (index) {
             setState(() {
-              selectedIndex = index;
+              currentIndex = index;
+              _tabController?.animateTo(index);
             });
           }),
-          <Widget>[
-            Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                itemCount: 50,
-                itemBuilder: (context, index) {
-                  return Text('Repos #${index + 1}');
-                },
-              ),
+          Expanded(
+            child: IndexedStack(
+              index: _tabController!.index,
+              children: [
+                ReposPage(),
+                StarredPage(),
+              ],
             ),
-            Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                itemCount: 50,
-                itemBuilder: (context, index) {
-                  return Text('Starred #${index + 1}');
-                },
-              ),
-            ),
-          ][_tabController!.index]
+          ),
         ],
       ),
     );
@@ -87,8 +136,8 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
 
 Widget userInfor() {
   return Container(
-    color: AppColors.white,
-    padding: EdgeInsets.symmetric(vertical: 32, horizontal: 20),
+    color: AppColors.appBarColor,
+    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -111,17 +160,6 @@ Widget userInfor() {
           ),
         ),
       ],
-    ),
-  );
-}
-
-Widget textFormField() {
-  return Container(
-    child: TextFormField(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: 'Username profile',
-      ),
     ),
   );
 }
