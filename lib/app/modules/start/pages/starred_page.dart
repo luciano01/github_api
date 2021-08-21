@@ -10,13 +10,16 @@ class StarredPageState extends State<StarredPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Center(
-            child: Text('Starred'),
-          ),
-        ],
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: ScrollPhysics(),
+          itemCount: 50,
+          itemBuilder: (context, index) {
+            return Text('Starred #${index + 1}');
+          },
+        ),
       ),
     );
   }

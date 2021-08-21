@@ -3,5 +3,5 @@ class AppConstants {
   static final String titleProfiles = 'profiles';
   static final String tabRepos = 'Repos';
   static final String tabStarred = 'Starred';
-  static final String textFormFieldHintText = 'Filter by name';
+  static final String textFormFieldHintText = 'Username profile';
 }
