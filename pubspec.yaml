@@ -19,6 +19,7 @@ dependencies:
   build_runner: ^2.1.1
   modular_codegen: ^3.0.2
   dio: ^4.0.0
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_modular_test: ^1.0.1
@@ -29,6 +30,9 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/images/
 
 vars: 
     clean: flutter clean

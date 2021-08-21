@@ -8,8 +8,8 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Github API',
       theme: ThemeData(
-        primaryColor: Colors.black,
-        accentColor: Colors.black,
+        primaryColor: Colors.white,
+        accentColor: Colors.white,
       ),
     ).modular();
   }
