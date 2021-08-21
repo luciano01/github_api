@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:github_api/app/modules/repos/repos_module.dart';
-import 'package:github_api/app/modules/starred/starred_module.dart';
+import 'package:github_api/app/modules/start/pages/repos_page.dart';
+import 'package:github_api/app/modules/start/pages/starred_page.dart';
 import 'package:github_api/app/modules/start/start_store.dart';
 import 'package:flutter/material.dart';
 import 'package:github_api/app/shared/utils/app_colors.dart';
@@ -17,8 +17,6 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
   final StartStore store = Modular.get();
   TabController? _tabController;
 
-  final pageViewController = PageController();
-
   @override
   void initState() {
     _tabController = TabController(
@@ -32,7 +30,6 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
   @override
   void dispose() {
     _tabController?.dispose();
-    pageViewController.dispose();
     super.dispose();
   }
 
@@ -103,9 +100,6 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
               unselectedLabelStyle: AppTextStyles.tabTitleDeactivate,
               labelStyle: AppTextStyles.tabTitleActivate,
               indicatorWeight: 5,
-              onTap: (index) {
-                pageViewController.jumpToPage(index);
-              },
               tabs: <Tab>[
                 Tab(
                   child: Row(
@@ -151,12 +145,12 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
             ),
           ),
           Expanded(
-            child: PageView(
+            child: TabBarView(
               physics: NeverScrollableScrollPhysics(),
-              controller: pageViewController,
+              controller: _tabController,
               children: [
-                ReposModule(),
-                StarredModule(),
+                ReposPage(),
+                StarredPage(),
               ],
             ),
           ),
