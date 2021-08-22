@@ -1,3 +1,4 @@
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:github_api/app/modules/start/pages/repos_page.dart';
 import 'package:github_api/app/modules/start/pages/starred_page.dart';
@@ -56,7 +57,8 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
         mini: true,
         child: Icon(Icons.search),
         onPressed: () {
-          showModalBottomSheet(
+          store.getRepositories(user: 'jacobaraujo7');
+          /* showModalBottomSheet(
             isScrollControlled: true,
             backgroundColor: Colors.transparent,
             context: context,
@@ -106,30 +108,48 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
                 ),
               );
             },
-          );
+          ); */
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      body: Column(
-        children: [
-          userInfor(),
-          tabBar(_tabController!, (index) {
-            setState(() {
-              currentIndex = index;
-              _tabController?.animateTo(index);
-            });
-          }),
-          Expanded(
-            child: IndexedStack(
-              index: _tabController!.index,
-              children: [
-                ReposPage(),
-                StarredPage(),
-              ],
+      body: Observer(builder: (_) {
+        var list = store.listOfRepositories.value;
+        var error = store.listOfRepositories.error;
+
+        if (list == null || list.isEmpty) {
+          return Center(
+              child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(
+              Colors.black,
             ),
-          ),
-        ],
-      ),
+          ));
+        }
+
+        if (error != null) {
+          return Center(child: Text('Oops! Something wrong!'));
+        }
+
+        return Column(
+          children: [
+            userInfor(),
+            tabBar(_tabController!, (index) {
+              setState(() {
+                currentIndex = index;
+                _tabController?.animateTo(index);
+              });
+            }),
+            Expanded(
+              child: IndexedStack(
+                index: _tabController!.index,
+                children: [
+                  ReposPage(list: list),
+                  StarredPage(),
+                ],
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }
