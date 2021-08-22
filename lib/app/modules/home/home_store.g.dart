@@ -24,6 +24,52 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     });
   }
 
+  final _$isLoadingAtom = Atom(name: '_HomeStoreBase.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  final _$listOfRepositoriesAtom =
+      Atom(name: '_HomeStoreBase.listOfRepositories');
+
+  @override
+  ObservableFuture<dynamic> get listOfRepositories {
+    _$listOfRepositoriesAtom.reportRead();
+    return super.listOfRepositories;
+  }
+
+  @override
+  set listOfRepositories(ObservableFuture<dynamic> value) {
+    _$listOfRepositoriesAtom.reportWrite(value, super.listOfRepositories, () {
+      super.listOfRepositories = value;
+    });
+  }
+
+  final _$listOfStarredsAtom = Atom(name: '_HomeStoreBase.listOfStarreds');
+
+  @override
+  ObservableFuture<dynamic> get listOfStarreds {
+    _$listOfStarredsAtom.reportRead();
+    return super.listOfStarreds;
+  }
+
+  @override
+  set listOfStarreds(ObservableFuture<dynamic> value) {
+    _$listOfStarredsAtom.reportWrite(value, super.listOfStarreds, () {
+      super.listOfStarreds = value;
+    });
+  }
+
   final _$getUserAsyncAction = AsyncAction('_HomeStoreBase.getUser');
 
   @override
@@ -31,10 +77,29 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     return _$getUserAsyncAction.run(() => super.getUser(user: user));
   }
 
+  final _$getRepositoriesAsyncAction =
+      AsyncAction('_HomeStoreBase.getRepositories');
+
+  @override
+  Future getRepositories({String? user}) {
+    return _$getRepositoriesAsyncAction
+        .run(() => super.getRepositories(user: user));
+  }
+
+  final _$getStarredsAsyncAction = AsyncAction('_HomeStoreBase.getStarreds');
+
+  @override
+  Future getStarreds({String? user}) {
+    return _$getStarredsAsyncAction.run(() => super.getStarreds(user: user));
+  }
+
   @override
   String toString() {
     return '''
-userProfile: ${userProfile}
+userProfile: ${userProfile},
+isLoading: ${isLoading},
+listOfRepositories: ${listOfRepositories},
+listOfStarreds: ${listOfStarreds}
     ''';
   }
 }
