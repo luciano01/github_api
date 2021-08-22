@@ -13,8 +13,16 @@ abstract class _StartStoreBase with Store {
   @observable
   ObservableFuture listOfRepositories = ObservableFuture.value([]);
 
+  @observable
+  ObservableFuture listOfStarreds = ObservableFuture.value([]);
+
   @action
   getRepositories({String? user}) async {
     listOfRepositories = _repository.getRepositories(user: user).asObservable();
+  }
+
+  @action
+  getStarreds({String? user}) async {
+    listOfStarreds = _repository.getStarreds(user: user).asObservable();
   }
 }

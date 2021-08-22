@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:github_api/app/shared/models/starred_model.dart';
 
 class StarredPage extends StatefulWidget {
-  const StarredPage({Key? key}) : super(key: key);
+  final List<StarredModel> list;
+  const StarredPage({
+    Key? key,
+    required this.list,
+  }) : super(key: key);
   @override
   StarredPageState createState() => StarredPageState();
 }
@@ -15,9 +20,13 @@ class StarredPageState extends State<StarredPage> {
         child: ListView.builder(
           shrinkWrap: true,
           physics: ScrollPhysics(),
-          itemCount: 50,
+          itemCount: widget.list.length,
           itemBuilder: (context, index) {
-            return Text('Starred #${index + 1}');
+            StarredModel starred = widget.list[index];
+            return ListTile(
+              title: Text(starred.name!),
+              subtitle: Text(starred.fullName!),
+            );
           },
         ),
       ),

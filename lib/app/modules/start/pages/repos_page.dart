@@ -21,8 +21,8 @@ class ReposPageState extends State<ReposPage> {
           itemBuilder: (context, index) {
             RepositoryModel repository = widget.list[index];
             return ListTile(
-              title: Text('Repos #${repository.name}'),
-              subtitle: Text('Repos #${repository.fullName}'),
+              title: Text(repository.name!),
+              subtitle: Text(repository.fullName!),
             );
           },
         ),

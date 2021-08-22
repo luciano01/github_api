@@ -25,6 +25,21 @@ mixin _$StartStore on _StartStoreBase, Store {
     });
   }
 
+  final _$listOfStarredsAtom = Atom(name: '_StartStoreBase.listOfStarreds');
+
+  @override
+  ObservableFuture<dynamic> get listOfStarreds {
+    _$listOfStarredsAtom.reportRead();
+    return super.listOfStarreds;
+  }
+
+  @override
+  set listOfStarreds(ObservableFuture<dynamic> value) {
+    _$listOfStarredsAtom.reportWrite(value, super.listOfStarreds, () {
+      super.listOfStarreds = value;
+    });
+  }
+
   final _$getRepositoriesAsyncAction =
       AsyncAction('_StartStoreBase.getRepositories');
 
@@ -34,10 +49,18 @@ mixin _$StartStore on _StartStoreBase, Store {
         .run(() => super.getRepositories(user: user));
   }
 
+  final _$getStarredsAsyncAction = AsyncAction('_StartStoreBase.getStarreds');
+
+  @override
+  Future getStarreds({String? user}) {
+    return _$getStarredsAsyncAction.run(() => super.getStarreds(user: user));
+  }
+
   @override
   String toString() {
     return '''
-listOfRepositories: ${listOfRepositories}
+listOfRepositories: ${listOfRepositories},
+listOfStarreds: ${listOfStarreds}
     ''';
   }
 }

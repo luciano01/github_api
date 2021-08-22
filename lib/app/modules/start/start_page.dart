@@ -4,6 +4,8 @@ import 'package:github_api/app/modules/start/pages/repos_page.dart';
 import 'package:github_api/app/modules/start/pages/starred_page.dart';
 import 'package:github_api/app/modules/start/start_store.dart';
 import 'package:flutter/material.dart';
+import 'package:github_api/app/shared/models/repository_model.dart';
+import 'package:github_api/app/shared/models/starred_model.dart';
 import 'package:github_api/app/shared/utils/app_colors.dart';
 import 'package:github_api/app/shared/utils/app_constants.dart';
 import 'package:github_api/app/shared/utils/app_images.dart';
@@ -57,7 +59,8 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
         mini: true,
         child: Icon(Icons.search),
         onPressed: () {
-          store.getRepositories(user: 'jacobaraujo7');
+          store.getRepositories(user: 'luciano01');
+          store.getStarreds(user: 'luciano01');
           /* showModalBottomSheet(
             isScrollControlled: true,
             backgroundColor: Colors.transparent,
@@ -113,10 +116,16 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Observer(builder: (_) {
-        var list = store.listOfRepositories.value;
-        var error = store.listOfRepositories.error;
+        var repositories = store.listOfRepositories.value;
+        var starreds = store.listOfStarreds.value;
+        var errorStarreds = store.listOfStarreds.error;
+        var errorRepositories = store.listOfRepositories.error;
+        
 
-        if (list == null || list.isEmpty) {
+        if (starreds == null ||
+            starreds.isEmpty ||
+            repositories == null ||
+            repositories.isEmpty) {
           return Center(
               child: CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation<Color>(
@@ -125,25 +134,30 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
           ));
         }
 
-        if (error != null) {
+        if (errorStarreds != null || errorRepositories != null) {
           return Center(child: Text('Oops! Something wrong!'));
         }
 
         return Column(
           children: [
             userInfor(),
-            tabBar(_tabController!, (index) {
-              setState(() {
-                currentIndex = index;
-                _tabController?.animateTo(index);
-              });
-            }),
+            tabBar(
+              _tabController!,
+              (index) {
+                setState(() {
+                  currentIndex = index;
+                  _tabController?.animateTo(index);
+                });
+              },
+              repositories.length,
+              starreds.length,
+            ),
             Expanded(
               child: IndexedStack(
                 index: _tabController!.index,
                 children: [
-                  ReposPage(list: list),
-                  StarredPage(),
+                  ReposPage(list: repositories),
+                  StarredPage(list: starreds),
                 ],
               ),
             ),
@@ -187,6 +201,8 @@ Widget userInfor() {
 Widget tabBar(
   TabController _tabController,
   void Function(int)? onTap,
+  int repositoriesLenght,
+  int starredsLength,
 ) {
   return Container(
     decoration: BoxDecoration(
@@ -222,7 +238,7 @@ Widget tabBar(
                   color: AppColors.whiteTwo,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text('73'),
+                child: Text('$repositoriesLenght'),
               ),
             ],
           ),
@@ -242,7 +258,7 @@ Widget tabBar(
                   color: AppColors.whiteTwo,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text('5'),
+                child: Text('$starredsLength'),
               ),
             ],
           ),
