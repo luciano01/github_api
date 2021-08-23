@@ -23,7 +23,7 @@ class AppRepository implements IAppRepository {
 
   @override
   Future<List<RepositoryModel>?> getRepositories({String? user}) async {
-    var baseUrl = user == null ? '/repositories' : '/users/$user/repos';
+    var baseUrl = '/users/$user/repos';
     Response response = await _dio.get(baseUrl);
     var data = response.data;
     return RepositoryModel.fromJsonList(data);

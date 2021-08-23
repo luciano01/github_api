@@ -49,6 +49,34 @@ class HomePageState extends State<HomePage> {
         overlayLoading.remove();
       }
     });
+    reaction((_) => store.errorMessage, (hasError) {
+      if (hasError != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: Duration(seconds: 3),
+            backgroundColor: Colors.red,
+            content: Row(
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 10),
+                Expanded(child: Text(store.errorMessage!)),
+              ],
+            ),
+            action: SnackBarAction(
+              label: 'Try Again',
+              textColor: Colors.white,
+              onPressed: () {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              },
+            ),
+          ),
+        );
+      }
+    });
+
     super.initState();
   }
 
@@ -61,20 +89,24 @@ class HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
         onPressed: () {
-          store.getUser(user: 'luciano01');
+          // store.getUser(user: 'luciano01');
+          // store.getAllDatas(username: 'jacobaraujo7');
+          store.getAllDatas(username: 'luciano01').then((_) {
+            store.setErrorMessage(null);
+          });
         },
       ),
       body: Observer(
         builder: (_) {
-          var repos = store.listOfRepositories.value;
+          var repos = store.listOfRepositories.value ?? [];
           var reposError = store.listOfRepositories.error;
-          var starreds = store.listOfStarreds.value;
+          var starreds = store.listOfStarreds.value ?? [];
           var starredsError = store.listOfStarreds.error;
           UserModel? userProfile = store.userProfile;
 
-          if (userProfile == null || repos == null || starreds == null) {
+          if (userProfile == null) {
             return Center(
-              child: Text('Please search for a user profile!'),
+              child: Text('No Users Searched!'),
             );
           }
 

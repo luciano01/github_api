@@ -39,6 +39,21 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     });
   }
 
+  final _$errorMessageAtom = Atom(name: '_HomeStoreBase.errorMessage');
+
+  @override
+  String? get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String? value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
   final _$listOfRepositoriesAtom =
       Atom(name: '_HomeStoreBase.listOfRepositories');
 
@@ -70,18 +85,35 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     });
   }
 
+  final _$getAllDatasAsyncAction = AsyncAction('_HomeStoreBase.getAllDatas');
+
+  @override
+  Future<dynamic> getAllDatas({String? username}) {
+    return _$getAllDatasAsyncAction
+        .run(() => super.getAllDatas(username: username));
+  }
+
   final _$getUserAsyncAction = AsyncAction('_HomeStoreBase.getUser');
 
   @override
-  Future getUser({String? user}) {
+  Future<dynamic> getUser({String? user}) {
     return _$getUserAsyncAction.run(() => super.getUser(user: user));
+  }
+
+  final _$getUserProfileAsyncAction =
+      AsyncAction('_HomeStoreBase.getUserProfile');
+
+  @override
+  Future<dynamic> getUserProfile({String? user}) {
+    return _$getUserProfileAsyncAction
+        .run(() => super.getUserProfile(user: user));
   }
 
   final _$getRepositoriesAsyncAction =
       AsyncAction('_HomeStoreBase.getRepositories');
 
   @override
-  Future getRepositories({String? user}) {
+  Future<dynamic> getRepositories({String? user}) {
     return _$getRepositoriesAsyncAction
         .run(() => super.getRepositories(user: user));
   }
@@ -89,8 +121,22 @@ mixin _$HomeStore on _HomeStoreBase, Store {
   final _$getStarredsAsyncAction = AsyncAction('_HomeStoreBase.getStarreds');
 
   @override
-  Future getStarreds({String? user}) {
+  Future<dynamic> getStarreds({String? user}) {
     return _$getStarredsAsyncAction.run(() => super.getStarreds(user: user));
+  }
+
+  final _$_HomeStoreBaseActionController =
+      ActionController(name: '_HomeStoreBase');
+
+  @override
+  dynamic setErrorMessage(String? value) {
+    final _$actionInfo = _$_HomeStoreBaseActionController.startAction(
+        name: '_HomeStoreBase.setErrorMessage');
+    try {
+      return super.setErrorMessage(value);
+    } finally {
+      _$_HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
@@ -98,6 +144,7 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     return '''
 userProfile: ${userProfile},
 isLoading: ${isLoading},
+errorMessage: ${errorMessage},
 listOfRepositories: ${listOfRepositories},
 listOfStarreds: ${listOfStarreds}
     ''';
