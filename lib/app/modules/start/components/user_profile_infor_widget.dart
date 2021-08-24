@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:github_api/app/shared/models/user_model.dart';
 import 'package:github_api/app/shared/utils/app_colors.dart';
 import 'package:github_api/app/shared/utils/app_text_styles.dart';
@@ -18,10 +19,22 @@ class UserProfileInforWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundImage: NetworkImage(
-              userProfile!.avatarUrl!,
+          Hero(
+            tag: userProfile!.id!,
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(userProfile!.avatarUrl!),
+                  fit: BoxFit.cover,
+                ),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.white,
+                  width: 2,
+                ),
+              ),
             ),
           ),
           SizedBox(width: 15),
@@ -40,6 +53,15 @@ class UserProfileInforWidget extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          TextButton(
+            child: Text('See more'),
+            onPressed: () {
+              Modular.to.pushNamed(
+                '/userProfile',
+                arguments: userProfile,
+              );
+            },
           ),
         ],
       ),

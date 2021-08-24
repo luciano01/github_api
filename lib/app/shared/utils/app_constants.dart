@@ -10,4 +10,5 @@ class AppConstants {
   static final String tabStarred = 'Starred';
   static final String textFormFieldHintText = 'Username profile';
   static final String bottomSheetTitle = 'Search a new user profile';
+  static final String seeFullProfileButotn = 'See Full Profile';
 }

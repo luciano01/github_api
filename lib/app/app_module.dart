@@ -1,5 +1,6 @@
 import 'package:github_api/app/modules/launch/launch_module.dart';
 import 'package:github_api/app/modules/start/start_module.dart';
+import 'package:github_api/app/modules/user_profile/userProfile_module.dart';
 import 'package:github_api/app/shared/repository/app_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -19,6 +20,11 @@ class AppModule extends Module {
     ModuleRoute(
       '/start',
       module: StartModule(),
+      transition: TransitionType.rightToLeftWithFade,
+    ),
+    ModuleRoute(
+      '/userProfile',
+      module: UserProfileModule(),
       transition: TransitionType.rightToLeftWithFade,
     ),
   ];

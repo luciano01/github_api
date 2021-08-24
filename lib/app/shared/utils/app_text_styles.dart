@@ -74,4 +74,33 @@ class AppTextStyles {
     fontSize: 14,
     fontWeight: FontWeight.normal,
   );
+  static final TextStyle userProfileName = GoogleFonts.openSans(
+    color: AppColors.primaryColor,
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
+
+  static final TextStyle userProfileBio = GoogleFonts.openSans(
+    color: AppColors.primaryColor,
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+  );
+
+  static final TextStyle userProfileNumbers = GoogleFonts.openSans(
+    color: AppColors.primaryColor,
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+  );
+
+  static final TextStyle userProfileNumbersText = GoogleFonts.openSans(
+    color: AppColors.warmGrey,
+    fontSize: 14,
+    fontWeight: FontWeight.normal,
+  );
+
+  static final TextStyle seeFullProfileButton = GoogleFonts.openSans(
+    color: AppColors.primaryColor,
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+  );
 }
