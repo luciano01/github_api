@@ -3,13 +3,19 @@ import 'package:github_api/app/shared/utils/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTextStyles {
-  static final TextStyle appBarTitle = GoogleFonts.openSans(
+  static final TextStyle launchAppName = GoogleFonts.openSans(
+    color: AppColors.white,
+    fontSize: 32,
+    fontWeight: FontWeight.normal,
+  );
+
+  static final TextStyle startAppBarTitleGithub = GoogleFonts.openSans(
     color: AppColors.white,
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
 
-  static final TextStyle appBarSubtitle = GoogleFonts.openSans(
+  static final TextStyle startAppBarTitleProfiles = GoogleFonts.openSans(
     color: AppColors.white,
     fontSize: 18,
     fontWeight: FontWeight.normal,
@@ -58,7 +64,7 @@ class AppTextStyles {
   );
 
   static final TextStyle repoSubtitle = GoogleFonts.openSans(
-    color: AppColors.appBarColor,
+    color: AppColors.primaryColor,
     fontSize: 12,
     fontWeight: FontWeight.normal,
   );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static final Color appBarColor = Color(0xFF24292E);
+  static final Color primaryColor = Color(0xFF24292E);
   static final Color rustyOrange = Color(0xFFE36209);
   static final Color slateGrey = Color(0xFF5C646D);
   static final Color slateGreyTwo = Color(0xFF586069);
