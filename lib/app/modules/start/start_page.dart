@@ -4,12 +4,11 @@ import 'package:github_api/app/modules/start/pages/repos_page.dart';
 import 'package:github_api/app/modules/start/pages/starred_page.dart';
 import 'package:github_api/app/modules/start/start_store.dart';
 import 'package:flutter/material.dart';
-import 'package:github_api/app/shared/models/repository_model.dart';
-import 'package:github_api/app/shared/models/starred_model.dart';
+import 'package:github_api/app/shared/models/user_model.dart';
 import 'package:github_api/app/shared/utils/app_colors.dart';
-import 'package:github_api/app/shared/utils/app_constants.dart';
 import 'package:github_api/app/shared/utils/app_images.dart';
 import 'package:github_api/app/shared/utils/app_text_styles.dart';
+import 'package:mobx/mobx.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({Key? key}) : super(key: key);
@@ -23,20 +22,86 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
   TabController? _tabController;
   int currentIndex = 0;
 
-  @override
-  void dispose() {
-    _tabController?.dispose();
-    super.dispose();
-  }
+  var overlayLoading = OverlayEntry(
+    builder: (BuildContext context) {
+      return Scaffold(
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          color: AppColors.appBarColor,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    AppColors.white,
+                  ),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  'Loading user data...',
+                  style: AppTextStyles.loadingData,
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
 
   @override
   void initState() {
+    store.getUserData(username: 'luciano01');
+
     _tabController = TabController(
       initialIndex: currentIndex,
       length: 2,
       vsync: this,
     );
+
+    reaction<bool>((_) => (store.isLoading), (isLoading) {
+      if (isLoading) {
+        Overlay.of(context)?.insert(overlayLoading);
+      } else {
+        overlayLoading.remove();
+      }
+    });
+    reaction((_) => store.errorMessage, (hasError) {
+      if (hasError != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: Duration(seconds: 3),
+            backgroundColor: Colors.red,
+            content: Row(
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 10),
+                Expanded(child: Text(store.errorMessage!)),
+              ],
+            ),
+            action: SnackBarAction(
+              label: 'Try Again',
+              textColor: Colors.white,
+              onPressed: () {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              },
+            ),
+          ),
+        );
+      }
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tabController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -59,8 +124,9 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
         mini: true,
         child: Icon(Icons.search),
         onPressed: () {
-          store.getRepositories(user: 'luciano01');
-          store.getStarreds(user: 'luciano01');
+          store.getUserData(username: 'luciano01').then((_) {
+            store.setErrorMessage(null);
+          });
           /* showModalBottomSheet(
             isScrollControlled: true,
             backgroundColor: Colors.transparent,
@@ -116,22 +182,20 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Observer(builder: (_) {
-        var repositories = store.listOfRepositories.value;
-        var starreds = store.listOfStarreds.value;
+        var repositories = store.listOfRepositories.value ?? [];
+        var starreds = store.listOfStarreds.value ?? [];
+        UserModel? userProfile = store.userProfile;
         var errorStarreds = store.listOfStarreds.error;
         var errorRepositories = store.listOfRepositories.error;
-        
 
-        if (starreds == null ||
-            starreds.isEmpty ||
-            repositories == null ||
-            repositories.isEmpty) {
+        if (userProfile == null) {
           return Center(
-              child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(
-              Colors.black,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                AppColors.appBarColor,
+              ),
             ),
-          ));
+          );
         }
 
         if (errorStarreds != null || errorRepositories != null) {
@@ -140,7 +204,7 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
 
         return Column(
           children: [
-            userInfor(),
+            userInfor(userProfile: userProfile),
             tabBar(
               _tabController!,
               (index) {
@@ -168,14 +232,19 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
   }
 }
 
-Widget userInfor() {
+Widget userInfor({UserModel? userProfile}) {
   return Container(
     color: AppColors.appBarColor,
     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        CircleAvatar(radius: 30, child: FlutterLogo(size: 50)),
+        CircleAvatar(
+          radius: 30,
+          backgroundImage: NetworkImage(
+            userProfile!.avatarUrl!,
+          ),
+        ),
         SizedBox(width: 15),
         Expanded(
           child: Column(
@@ -183,11 +252,11 @@ Widget userInfor() {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Luciano Martins',
+                userProfile.name!,
                 style: AppTextStyles.userTitle,
               ),
               Text(
-                'Flutter Developer',
+                userProfile.bio!,
                 style: AppTextStyles.userSubtitle,
               ),
             ],

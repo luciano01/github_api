@@ -11,4 +11,5 @@ class AppColors {
   static final Color whiteTwo = Color(0xFFE3E3E3);
   static final Color paleGrey = Color(0xFFE1E4E8);
   static final Color deactivateTab = Color(0xFFDFDFDF);
+  static final Color reposTitle = Color(0xFF2791D8);
 }

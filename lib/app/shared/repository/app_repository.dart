@@ -14,7 +14,7 @@ class AppRepository implements IAppRepository {
   }
 
   @override
-  Future<UserModel?> getUser({String? user}) async {
+  Future<UserModel?> getUserProfile({String? user}) async {
     var url = 'users/$user';
     Response response = await _dio.get(url);
     var data = response.data;

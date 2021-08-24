@@ -50,4 +50,22 @@ class AppTextStyles {
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
+
+  static final TextStyle repoTitle = GoogleFonts.openSans(
+    color: AppColors.reposTitle,
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
+
+  static final TextStyle repoSubtitle = GoogleFonts.openSans(
+    color: AppColors.appBarColor,
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+  );
+
+  static final TextStyle loadingData = GoogleFonts.openSans(
+    color: AppColors.white,
+    fontSize: 14,
+    fontWeight: FontWeight.normal,
+  );
 }
