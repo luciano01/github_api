@@ -85,6 +85,21 @@ mixin _$StartStore on _StartStoreBase, Store {
     });
   }
 
+  final _$usernameAtom = Atom(name: '_StartStoreBase.username');
+
+  @override
+  String? get username {
+    _$usernameAtom.reportRead();
+    return super.username;
+  }
+
+  @override
+  set username(String? value) {
+    _$usernameAtom.reportWrite(value, super.username, () {
+      super.username = value;
+    });
+  }
+
   final _$getUserDataAsyncAction = AsyncAction('_StartStoreBase.getUserData');
 
   @override
@@ -108,13 +123,25 @@ mixin _$StartStore on _StartStoreBase, Store {
   }
 
   @override
+  dynamic setUsername(String? value) {
+    final _$actionInfo = _$_StartStoreBaseActionController.startAction(
+        name: '_StartStoreBase.setUsername');
+    try {
+      return super.setUsername(value);
+    } finally {
+      _$_StartStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 errorMessage: ${errorMessage},
 userProfile: ${userProfile},
 listOfRepositories: ${listOfRepositories},
-listOfStarreds: ${listOfStarreds}
+listOfStarreds: ${listOfStarreds},
+username: ${username}
     ''';
   }
 }

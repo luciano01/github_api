@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:github_api/app/shared/models/user_model.dart';
 import 'package:github_api/app/shared/repository/app_repository_interface.dart';
 import 'package:mobx/mobx.dart';
@@ -29,6 +30,26 @@ abstract class _StartStoreBase with Store {
 
   @observable
   ObservableFuture listOfStarreds = ObservableFuture.value([]);
+
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  @observable
+  String? username;
+
+  @action
+  setUsername(String? value) => username = value;
+
+  String? validateUsername(String? value) {
+    if (value == null ||
+        value.isEmpty ||
+        value.length < 3 ||
+        value.contains('@')) {
+      autovalidateMode = AutovalidateMode.always;
+      return 'Invalid username. Try gain!';
+    } else {
+      return null;
+    }
+  }
 
   @action
   Future getUserData({String? username}) async {

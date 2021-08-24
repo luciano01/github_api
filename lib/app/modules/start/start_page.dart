@@ -6,6 +6,7 @@ import 'package:github_api/app/modules/start/start_store.dart';
 import 'package:flutter/material.dart';
 import 'package:github_api/app/shared/models/user_model.dart';
 import 'package:github_api/app/shared/utils/app_colors.dart';
+import 'package:github_api/app/shared/utils/app_constants.dart';
 import 'package:github_api/app/shared/utils/app_images.dart';
 import 'package:github_api/app/shared/utils/app_text_styles.dart';
 import 'package:mobx/mobx.dart';
@@ -21,6 +22,8 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
 
   TabController? _tabController;
   int currentIndex = 0;
+
+  final _formKey = GlobalKey<FormState>();
 
   var overlayLoading = OverlayEntry(
     builder: (BuildContext context) {
@@ -124,60 +127,74 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
         mini: true,
         child: Icon(Icons.search),
         onPressed: () {
-          store.getUserData(username: 'luciano01').then((_) {
-            store.setErrorMessage(null);
-          });
-          /* showModalBottomSheet(
+          showModalBottomSheet(
             isScrollControlled: true,
             backgroundColor: Colors.transparent,
             context: context,
             builder: (context) {
-              return Container(
-                padding: MediaQuery.of(context).viewInsets,
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(32),
-                    topRight: Radius.circular(32),
+              return Form(
+                key: _formKey,
+                autovalidateMode: store.autovalidateMode,
+                child: Container(
+                  padding: MediaQuery.of(context).viewInsets,
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(32),
+                      topRight: Radius.circular(32),
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-                  child: Wrap(
-                    children: [
-                      Center(
-                        child: Text(
-                          AppConstants.bottomSheetTitle,
-                          style: AppTextStyles.bottomSheetTitle,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                    child: Wrap(
+                      children: [
+                        Center(
+                          child: Text(
+                            AppConstants.bottomSheetTitle,
+                            style: AppTextStyles.bottomSheetTitle,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 40),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                hintText: AppConstants.textFormFieldHintText,
-                                prefixIcon: Icon(Icons.person),
+                        SizedBox(height: 40),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  hintText: AppConstants.textFormFieldHintText,
+                                  prefixIcon: Icon(Icons.person),
+                                ),
+                                validator: store.validateUsername,
+                                onChanged: store.setUsername,
+                                keyboardType: TextInputType.text,
                               ),
                             ),
-                          ),
-                          SizedBox(width: 15),
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: BoxConstraints(),
-                            icon: Icon(Icons.send),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                    ],
+                            SizedBox(width: 15),
+                            IconButton(
+                              padding: EdgeInsets.zero,
+                              constraints: BoxConstraints(),
+                              icon: Icon(Icons.send),
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  store
+                                      .getUserData(username: store.username)
+                                      .then((_) {
+                                    store.setErrorMessage(null);
+                                  });
+                                  FocusScope.of(context).unfocus();
+                                  Modular.to.pop();
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
             },
-          ); */
+          );
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
@@ -252,11 +269,11 @@ Widget userInfor({UserModel? userProfile}) {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                userProfile.name!,
+                userProfile.name ?? 'No Name',
                 style: AppTextStyles.userTitle,
               ),
               Text(
-                userProfile.bio!,
+                userProfile.bio ?? 'No Bio',
                 style: AppTextStyles.userSubtitle,
               ),
             ],
