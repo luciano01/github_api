@@ -2,7 +2,12 @@
 Retrieving user repositories with Dio package.
 
 ## Screeshots
-<img align="left" width="360" height="640" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Launch.png">  <img align="left" width="360" height="640" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Start.png">  <img align="left" width="360" height="640" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Search.png">  <img align="left" width="360" height="640" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Details.png"> 
+<p float="left">
+  <img width="220" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Launch.png">
+  <img width="220" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Start.png">
+  <img width="220" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Search.png">
+  <img width="220" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Details.png">
+</p>
 
 ## For developers
 > To clone locally
