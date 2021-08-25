@@ -12,7 +12,7 @@ class LoadingListWidget extends StatelessWidget {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: AppColors.primaryColor,
+        color: AppColors.github,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +25,7 @@ class LoadingListWidget extends StatelessWidget {
               SizedBox(height: 15),
               Text(
                 AppConstants.loadingUserData,
-                style: AppTextStyles.loadingData,
+                style: AppTextStyles.title14WB,
               ),
             ],
           ),

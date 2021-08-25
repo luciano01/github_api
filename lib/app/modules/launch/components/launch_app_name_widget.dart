@@ -9,7 +9,7 @@ class LaunchAppNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       AppConstants.launchAppName,
-      style: AppTextStyles.launchAppName,
+      style: AppTextStyles.title32WN,
     );
   }
 }

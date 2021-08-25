@@ -14,7 +14,7 @@ class UserProfileInforWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.primaryColor,
+      color: AppColors.github,
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -45,17 +45,20 @@ class UserProfileInforWidget extends StatelessWidget {
               children: [
                 Text(
                   userProfile?.name ?? 'No Name',
-                  style: AppTextStyles.userTitle,
+                  style: AppTextStyles.title18WB,
                 ),
                 Text(
                   userProfile?.bio ?? 'No Bio',
-                  style: AppTextStyles.userSubtitle,
+                  style: AppTextStyles.title14WN,
                 ),
               ],
             ),
           ),
-          TextButton(
-            child: Text('See more'),
+          IconButton(
+            icon: Icon(
+              Icons.keyboard_arrow_right,
+              color: AppColors.white,
+            ),
             onPressed: () {
               Modular.to.pushNamed(
                 '/userProfile',

@@ -10,15 +10,15 @@ class AppBarTitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(AppImages.github, width: 30),
+        Image.asset(AppImages.githubWhite, width: 30),
         SizedBox(width: 15),
         Text(
-          AppConstants.startAppBarTitleGithub,
-          style: AppTextStyles.startAppBarTitleGithub,
+          AppConstants.startAppBarTitle,
+          style: AppTextStyles.title18WB,
         ),
         Text(
-          AppConstants.startAppBarTitleProfiles,
-          style: AppTextStyles.startAppBarTitleProfiles,
+          AppConstants.startAppBarSubtitle,
+          style: AppTextStyles.title18WN,
         ),
       ],
     );

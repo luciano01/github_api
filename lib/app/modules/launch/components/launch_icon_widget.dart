@@ -7,8 +7,8 @@ class LaunchIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      AppImages.github,
-      width: 120,
+      AppImages.githubWhite,
+      width: 100,
     );
   }
 }

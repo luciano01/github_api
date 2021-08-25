@@ -20,12 +20,12 @@ class ListItemWidget extends StatelessWidget {
         children: [
           Text(
             starred.fullName ?? 'Full Name',
-            style: AppTextStyles.repoTitle,
+            style: AppTextStyles.title18BlueB,
           ),
           SizedBox(height: 10),
           Text(
             starred.description ?? 'No Description',
-            style: AppTextStyles.repoSubtitle,
+            style: AppTextStyles.title12BN,
           ),
           SizedBox(height: 20),
           Row(
@@ -34,7 +34,7 @@ class ListItemWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(Icons.star, color: AppColors.primaryColor),
+                  Icon(Icons.star, color: AppColors.github),
                   SizedBox(width: 5),
                   Text('${starred.stargazersCount}'),
                 ],

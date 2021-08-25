@@ -39,7 +39,7 @@ class SearchBottomSheetWidget extends StatelessWidget {
               Center(
                 child: Text(
                   AppConstants.bottomSheetTitle,
-                  style: AppTextStyles.bottomSheetTitle,
+                  style: AppTextStyles.title18BB,
                 ),
               ),
               SizedBox(height: 40),

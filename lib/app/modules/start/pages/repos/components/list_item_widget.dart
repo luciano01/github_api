@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_api/app/shared/models/repository_model.dart';
 import 'package:github_api/app/shared/utils/app_colors.dart';
+import 'package:github_api/app/shared/utils/app_images.dart';
 import 'package:github_api/app/shared/utils/app_text_styles.dart';
 
 class ListItemWidget extends StatelessWidget {
@@ -20,12 +21,12 @@ class ListItemWidget extends StatelessWidget {
         children: [
           Text(
             repository.fullName ?? 'Full Name',
-            style: AppTextStyles.repoTitle,
+            style: AppTextStyles.title18BlueB,
           ),
           SizedBox(height: 10),
           Text(
             repository.description ?? 'No Description',
-            style: AppTextStyles.repoSubtitle,
+            style: AppTextStyles.title12BN,
           ),
           SizedBox(height: 20),
           Row(
@@ -34,7 +35,7 @@ class ListItemWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(Icons.code, color: AppColors.primaryColor),
+                  Icon(Icons.code, color: AppColors.github),
                   SizedBox(width: 5),
                   Text(repository.language ?? 'No Language'),
                 ],
@@ -42,7 +43,7 @@ class ListItemWidget extends StatelessWidget {
               SizedBox(width: 20),
               Row(
                 children: [
-                  Image.asset('assets/images/fork.png', width: 24),
+                  Image.asset(AppImages.githubFork, width: 24),
                   SizedBox(width: 5),
                   Text('${repository.forksCount}'),
                 ],

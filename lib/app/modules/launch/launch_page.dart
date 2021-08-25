@@ -26,7 +26,7 @@ class LaunchPageState extends State<LaunchPage> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: AppColors.primaryColor,
+        color: AppColors.github,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

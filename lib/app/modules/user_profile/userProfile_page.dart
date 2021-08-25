@@ -51,7 +51,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                         ),
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: AppColors.primaryColor,
+                          color: AppColors.github,
                           width: 4,
                         ),
                       ),
@@ -60,17 +60,17 @@ class UserProfilePageState extends State<UserProfilePage> {
                   SizedBox(height: 10),
                   Text(
                     widget.userProfile!.name!,
-                    style: AppTextStyles.userProfileName,
+                    style: AppTextStyles.title18BB,
                   ),
                   Text(
                     '@${widget.userProfile!.login!}',
-                    style: AppTextStyles.userProfileBio,
+                    style: AppTextStyles.title14BN,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 15),
                   Text(
                     widget.userProfile!.bio!,
-                    style: AppTextStyles.userProfileBio,
+                    style: AppTextStyles.title16BN,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 20),
@@ -81,12 +81,12 @@ class UserProfilePageState extends State<UserProfilePage> {
                         children: [
                           Text(
                             '${widget.userProfile!.publicRepos}',
-                            style: AppTextStyles.userProfileNumbers,
+                            style: AppTextStyles.title18BB,
                           ),
                           SizedBox(height: 5),
                           Text(
                             'Public Repos',
-                            style: AppTextStyles.userProfileNumbersText,
+                            style: AppTextStyles.title14BN,
                           ),
                         ],
                       ),
@@ -94,12 +94,12 @@ class UserProfilePageState extends State<UserProfilePage> {
                         children: [
                           Text(
                             '${widget.userProfile!.followers}',
-                            style: AppTextStyles.userProfileNumbers,
+                            style: AppTextStyles.title18BB,
                           ),
                           SizedBox(height: 5),
                           Text(
                             'Followers',
-                            style: AppTextStyles.userProfileNumbersText,
+                            style: AppTextStyles.title14BN,
                           ),
                         ],
                       ),
@@ -107,12 +107,12 @@ class UserProfilePageState extends State<UserProfilePage> {
                         children: [
                           Text(
                             '${widget.userProfile!.following}',
-                            style: AppTextStyles.userProfileNumbers,
+                            style: AppTextStyles.title18BB,
                           ),
                           SizedBox(height: 5),
                           Text(
                             'Following',
-                            style: AppTextStyles.userProfileNumbersText,
+                            style: AppTextStyles.title14BN,
                           ),
                         ],
                       ),
@@ -157,7 +157,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                           side: BorderSide(
-                            color: AppColors.primaryColor,
+                            color: AppColors.github,
                           ),
                         ),
                       ),
@@ -166,7 +166,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                         Image.asset('assets/images/githubBlack.png', width: 20),
                     label: Text(
                       AppConstants.seeFullProfileButotn,
-                      style: AppTextStyles.seeFullProfileButton,
+                      style: AppTextStyles.title18BN,
                     ),
                     onPressed: () {
                       print(widget.userProfile!.htmlUrl!);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_api/app/shared/utils/app_colors.dart';
+import 'package:github_api/app/shared/utils/app_constants.dart';
 import 'package:github_api/app/shared/utils/app_text_styles.dart';
 
 class TabbarWidget extends StatelessWidget {
@@ -19,10 +20,10 @@ class TabbarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.deactivateTab.withOpacity(0.0),
+        color: AppColors.white,
         border: Border(
           bottom: BorderSide(
-            color: AppColors.deactivateTab,
+            color: AppColors.grey,
             width: 0.8,
           ),
         ),
@@ -30,9 +31,9 @@ class TabbarWidget extends StatelessWidget {
       child: TabBar(
         isScrollable: false,
         controller: tabController,
-        indicatorColor: AppColors.rustyOrange,
-        unselectedLabelStyle: AppTextStyles.tabTitleDeactivate,
-        labelStyle: AppTextStyles.tabTitleActivate,
+        indicatorColor: AppColors.github,
+        unselectedLabelStyle: AppTextStyles.title14GN,
+        labelStyle: AppTextStyles.title14BB,
         indicatorWeight: 5,
         onTap: onTap,
         tabs: <Tab>[
@@ -40,7 +41,7 @@ class TabbarWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Repos'),
+                Text(AppConstants.tabRepos.toUpperCase()),
                 SizedBox(width: 5),
                 Container(
                   padding: EdgeInsets.symmetric(
@@ -48,10 +49,13 @@ class TabbarWidget extends StatelessWidget {
                     horizontal: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.whiteTwo,
-                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.grey,
+                    shape: BoxShape.circle,
                   ),
-                  child: Text('$repositoriesLenght'),
+                  child: Text(
+                    '$repositoriesLenght',
+                    style: AppTextStyles.title14BB,
+                  ),
                 ),
               ],
             ),
@@ -60,7 +64,7 @@ class TabbarWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Starred'),
+                Text(AppConstants.tabStarred.toUpperCase()),
                 SizedBox(width: 5),
                 Container(
                   padding: EdgeInsets.symmetric(
@@ -68,10 +72,13 @@ class TabbarWidget extends StatelessWidget {
                     horizontal: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.whiteTwo,
-                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.grey,
+                    shape: BoxShape.circle,
                   ),
-                  child: Text('$starredsLength'),
+                  child: Text(
+                    '$starredsLength',
+                    style: AppTextStyles.title14BB,
+                  ),
                 ),
               ],
             ),

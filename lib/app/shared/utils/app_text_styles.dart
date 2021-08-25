@@ -3,104 +3,99 @@ import 'package:github_api/app/shared/utils/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTextStyles {
-  static final TextStyle launchAppName = GoogleFonts.openSans(
+  static final TextStyle title32WN = GoogleFonts.openSans(
     color: AppColors.white,
     fontSize: 32,
     fontWeight: FontWeight.normal,
   );
 
-  static final TextStyle startAppBarTitleGithub = GoogleFonts.openSans(
-    color: AppColors.white,
+  static final TextStyle title18BB = GoogleFonts.openSans(
+    color: AppColors.black,
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
 
-  static final TextStyle startAppBarTitleProfiles = GoogleFonts.openSans(
-    color: AppColors.white,
-    fontSize: 18,
-    fontWeight: FontWeight.normal,
-  );
-
-  static final TextStyle userTitle = GoogleFonts.openSans(
-    color: AppColors.white,
-    fontSize: 18,
-    fontWeight: FontWeight.bold,
-  );
-
-  static final TextStyle userSubtitle = GoogleFonts.openSans(
+  static final TextStyle title14WN = GoogleFonts.openSans(
     color: AppColors.white,
     fontSize: 14,
     fontWeight: FontWeight.normal,
   );
 
-  static final TextStyle tabTitleActivate = GoogleFonts.openSans(
-    color: AppColors.slateGrey,
+  static final TextStyle title14BB = GoogleFonts.openSans(
+    color: AppColors.black,
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
 
-  static final TextStyle tabTitleDeactivate = GoogleFonts.openSans(
-    color: AppColors.slateGrey,
+  static final TextStyle title16BN = GoogleFonts.openSans(
+    color: AppColors.black,
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+  );
+
+  static final TextStyle title18BN = GoogleFonts.openSans(
+    color: AppColors.black,
+    fontSize: 18,
+    fontWeight: FontWeight.normal,
+  );
+
+  static final TextStyle title18WB = GoogleFonts.openSans(
+    color: AppColors.white,
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
+
+  static final TextStyle title18WN = GoogleFonts.openSans(
+    color: AppColors.white,
+    fontSize: 18,
+    fontWeight: FontWeight.normal,
+  );
+
+  static final TextStyle title16WN = GoogleFonts.openSans(
+    color: AppColors.white,
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+  );
+
+  static final TextStyle title16WB = GoogleFonts.openSans(
+    color: AppColors.white,
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+  );
+
+  static final TextStyle title18GN = GoogleFonts.openSans(
+    color: AppColors.grey,
+    fontSize: 18,
+    fontWeight: FontWeight.normal,
+  );
+
+  static final TextStyle title14GN = GoogleFonts.openSans(
+    color: AppColors.grey,
     fontSize: 14,
     fontWeight: FontWeight.normal,
   );
 
-  static final TextStyle tabQuantity = GoogleFonts.openSans(
-    color: AppColors.slateGrey,
+  static final TextStyle title14WB = GoogleFonts.openSans(
+    color: AppColors.white,
     fontSize: 14,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.normal,
   );
 
-  static final TextStyle bottomSheetTitle = GoogleFonts.openSans(
-    color: AppColors.slateGrey,
-    fontSize: 18,
-    fontWeight: FontWeight.bold,
-  );
-
-  static final TextStyle repoTitle = GoogleFonts.openSans(
-    color: AppColors.reposTitle,
-    fontSize: 18,
-    fontWeight: FontWeight.bold,
-  );
-
-  static final TextStyle repoSubtitle = GoogleFonts.openSans(
-    color: AppColors.primaryColor,
+  static final TextStyle title12BN = GoogleFonts.openSans(
+    color: AppColors.black,
     fontSize: 12,
     fontWeight: FontWeight.normal,
   );
 
-  static final TextStyle loadingData = GoogleFonts.openSans(
-    color: AppColors.white,
+  static final TextStyle title14BN = GoogleFonts.openSans(
+    color: AppColors.black,
     fontSize: 14,
     fontWeight: FontWeight.normal,
   );
-  static final TextStyle userProfileName = GoogleFonts.openSans(
-    color: AppColors.primaryColor,
+
+  static final TextStyle title18BlueB = GoogleFonts.openSans(
+    color: AppColors.blue500,
     fontSize: 18,
     fontWeight: FontWeight.bold,
-  );
-
-  static final TextStyle userProfileBio = GoogleFonts.openSans(
-    color: AppColors.primaryColor,
-    fontSize: 16,
-    fontWeight: FontWeight.normal,
-  );
-
-  static final TextStyle userProfileNumbers = GoogleFonts.openSans(
-    color: AppColors.primaryColor,
-    fontSize: 16,
-    fontWeight: FontWeight.bold,
-  );
-
-  static final TextStyle userProfileNumbersText = GoogleFonts.openSans(
-    color: AppColors.warmGrey,
-    fontSize: 14,
-    fontWeight: FontWeight.normal,
-  );
-
-  static final TextStyle seeFullProfileButton = GoogleFonts.openSans(
-    color: AppColors.primaryColor,
-    fontSize: 16,
-    fontWeight: FontWeight.normal,
   );
 }

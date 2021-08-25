@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:github_api/app/shared/models/user_model.dart';
 import 'package:github_api/app/shared/utils/app_colors.dart';
 import 'package:github_api/app/shared/utils/app_constants.dart';
+import 'package:github_api/app/shared/utils/app_images.dart';
+import 'package:github_api/app/shared/utils/app_text_styles.dart';
 import 'package:mobx/mobx.dart';
 
 class StartPage extends StatefulWidget {
@@ -67,7 +69,7 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
               ],
             ),
             action: SnackBarAction(
-              label: AppConstants.searchErrorSnackbar,
+              label: AppConstants.tryAgain,
               textColor: AppColors.white,
               onPressed: () {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -91,7 +93,7 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: AppColors.github,
         elevation: 0,
         title: AppBarTitleWidget(),
       ),
@@ -119,17 +121,33 @@ class StartPageState extends State<StartPage> with TickerProviderStateMixin {
         var errorRepositories = store.listOfRepositories.error;
 
         if (userProfile == null || repositories == null || starreds == null) {
-          return Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                AppColors.primaryColor,
-              ),
-            ),
-          );
+          return LoadingListWidget();
         }
 
         if (errorStarreds != null || errorRepositories != null) {
-          return Center(child: Text('Oops! Something wrong!'));
+          return Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            color: AppColors.github,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(AppImages.githubOctocat, width: 220),
+                  SizedBox(height: 15),
+                  Text(
+                    AppConstants.error.toUpperCase(),
+                    style: AppTextStyles.title16WN,
+                  ),
+                  SizedBox(height: 15),
+                  Text(
+                    AppConstants.tryAgain.toUpperCase(),
+                    style: AppTextStyles.title16WB,
+                  ),
+                ],
+              ),
+            ),
+          );
         }
 
         return Column(
