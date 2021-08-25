@@ -21,6 +21,13 @@ $ cd github_api
 $ code .
 ```
 
+> To run, follow this on terminal
+```
+$ flutter clean
+$ flutter pub get
+$ flutter run --release
+```
+
 ## Built with
 - [Dart programming language](https://dart.dev/)
 - [Flutter](https://flutter.dev/)
