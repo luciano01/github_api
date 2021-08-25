@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.portfolio.github_api">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
         android:label="github_api"
         android:icon="@mipmap/ic_launcher">
