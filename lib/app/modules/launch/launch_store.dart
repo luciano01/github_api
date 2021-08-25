@@ -7,7 +7,7 @@ class LaunchStore = _LaunchStoreBase with _$LaunchStore;
 
 abstract class _LaunchStoreBase with Store {
   void waitAndSwitchToStartModule() async {
-    await Future.delayed(Duration(seconds: 1)).whenComplete(() {
+    await Future.delayed(Duration(seconds: 3)).whenComplete(() {
       Modular.to.pushReplacementNamed('/start');
     });
   }
