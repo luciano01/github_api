@@ -59,7 +59,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    widget.userProfile!.name!,
+                    widget.userProfile!.name ?? "No Name",
                     style: AppTextStyles.title18BB,
                   ),
                   Text(
@@ -69,7 +69,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                   ),
                   SizedBox(height: 15),
                   Text(
-                    widget.userProfile!.bio!,
+                    widget.userProfile!.bio ?? "No Bio",
                     style: AppTextStyles.title16BN,
                     textAlign: TextAlign.center,
                   ),

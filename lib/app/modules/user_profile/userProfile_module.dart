@@ -13,7 +13,7 @@ class UserProfileModule extends Module {
     ChildRoute(
       '/',
       child: (_, args) => UserProfilePage(
-        userProfile: args.data,
+        userProfile: args.data!,
       ),
     ),
   ];
