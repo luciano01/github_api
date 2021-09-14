@@ -3,7 +3,6 @@ Retrieving user repositories with Dio package.
 
 ## Screeshots
 <p float="left">
-  <img width="200" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Launch.png">
   <img width="200" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Start.png">
   <img width="200" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Search.png">
   <img width="200" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Details.png">
