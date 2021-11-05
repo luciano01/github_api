@@ -1,12 +1,8 @@
-# Github API
+# Github API (Migrating to Clean Architecture)
 Retrieving user repositories with Dio package.
 
 ## Screeshots
-<p float="left">
-  <img width="200" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Start.png">
-  <img width="200" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Search.png">
-  <img width="200" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Details.png">
-</p>
+Soon...
 
 ## For developers
 > To clone locally
@@ -30,10 +26,10 @@ $ flutter run --release
 ## Built with
 - [Dart programming language](https://dart.dev/)
 - [Flutter](https://flutter.dev/)
-- [MobX](https://pub.dev/packages/mobx)
-- [Flutter Modular](https://pub.dev/packages/flutter_modular)
-- [Dio](https://pub.dev/packages/dio)
-- [Github API](https://docs.github.com/en/rest)
+- [BLoC](https://pub.dev/packages/bloc)
+- [Http](https://pub.dev/packages/http)
+- [GitHub API](https://docs.github.com/en/rest)
+- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 ## Author
-* Luciano Martins ([Linkedin](https://br.linkedin.com/in/luciano01))
+- ([Linkedin - Luciano Martins](https://br.linkedin.com/in/luciano01))
