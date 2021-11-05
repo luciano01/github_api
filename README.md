@@ -1,7 +1,7 @@
-# Github API (Migrating to Clean Architecture)
+# GitHub API (Migrating to Clean Architecture)
 Retrieving user repositories with Dio package.
 
-## Screeshots
+## Screenshots
 Soon...
 
 ## For developers
