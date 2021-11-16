@@ -27,14 +27,16 @@ void main() {
     forksCount: 0,
   );
 
-  test('Should get user repositories from the repository.', () async {
+  final listOfRepos = <Repos>[tRepos];
+
+  test('Should a List<Repos> from the repository.', () async {
     // arrange
     when(mockReposRepository.getUserRepositories(userName: tUserName))
-        .thenAnswer((_) async => Right(tRepos));
+        .thenAnswer((_) async => Right(listOfRepos));
     // act
     final result = await usecase.getUserRepositories(userName: tUserName);
     // assert
-    expect(result, Right(tRepos));
+    expect(result, Right(listOfRepos));
     verify(mockReposRepository.getUserRepositories(userName: tUserName));
     verifyNoMoreInteractions(mockReposRepository);
   });

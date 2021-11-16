@@ -32,13 +32,13 @@ class MockReposRepository extends _i1.Mock implements _i3.ReposRepository {
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.Repos>> getUserRepositories(
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.Repos>>> getUserRepositories(
           {String? userName}) =>
       (super.noSuchMethod(
           Invocation.method(#getUserRepositories, [], {#userName: userName}),
-          returnValue: Future<_i2.Either<_i5.Failure, _i6.Repos>>.value(
-              _FakeEither_0<_i5.Failure, _i6.Repos>())) as _i4
-          .Future<_i2.Either<_i5.Failure, _i6.Repos>>);
+          returnValue: Future<_i2.Either<_i5.Failure, List<_i6.Repos>>>.value(
+              _FakeEither_0<_i5.Failure, List<_i6.Repos>>())) as _i4
+          .Future<_i2.Either<_i5.Failure, List<_i6.Repos>>>);
   @override
   String toString() => super.toString();
 }

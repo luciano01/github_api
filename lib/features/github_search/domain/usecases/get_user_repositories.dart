@@ -9,7 +9,7 @@ class GetUserRepositories implements ReposRepository {
   GetUserRepositories({required this.repository});
 
   @override
-  Future<Either<Failure, Repos>> getUserRepositories(
+  Future<Either<Failure, List<Repos>>> getUserRepositories(
       {required String userName}) async {
     return await repository.getUserRepositories(userName: userName);
   }
