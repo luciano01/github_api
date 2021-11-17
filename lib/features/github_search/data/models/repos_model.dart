@@ -15,10 +15,10 @@ class ReposModel extends Repos {
 
   factory ReposModel.fromJson(Map<String, dynamic> json) {
     return ReposModel(
-      fullName: json['full_name'],
-      description: json['description'],
-      language: json['language'],
-      forksCount: json['forks_count'],
+      fullName: json['full_name'] ?? 'No Name',
+      description: json['description'] ?? 'No Description',
+      language: json['language'] ?? 'No Language',
+      forksCount: json['forks_count'] ?? 0,
     );
   }
 
