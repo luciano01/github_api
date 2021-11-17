@@ -3,7 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:github_api/core/utils/store_state.dart';
 import 'package:github_api/features/github_search/domain/entities/repos.dart';
-import 'package:github_api/features/github_search/presentation/store/repos_store.dart';
+import 'package:github_api/features/github_search/presentation/controller/form_field_controller.dart';
+import 'package:github_api/features/github_search/presentation/controller/repos_store.dart';
 import 'package:github_api/features/github_search/presentation/widgets/custom_app_bar.dart';
 import 'package:github_api/features/github_search/presentation/widgets/initial_state.dart';
 import 'package:github_api/features/github_search/presentation/widgets/loading_state.dart';
@@ -19,6 +20,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final store = GetIt.instance.get<ReposStore>();
+  final formFieldController = FormFieldController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +49,20 @@ class _HomePageState extends State<HomePage> {
             }),
           ),
           SearchField(
+            formKey: _formKey,
+            autovalidateMode: formFieldController.autovalidateMode,
+            validator: formFieldController.validateUserName,
+            controller: formFieldController.controller,
             onPressedSearch: () {
-              store.getUserRepositories(userName: 'luciano01');
+              if (_formKey.currentState!.validate()) {
+                store.getUserRepositories(userName: formFieldController.text);
+              }
             },
-            onPressedClean: () {},
+            onFieldSubmitted: (value) {
+              if (_formKey.currentState!.validate()) {
+                store.getUserRepositories(userName: value);
+              }
+            },
           ),
         ],
       ),

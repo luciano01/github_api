@@ -9,17 +9,19 @@ class InitialState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(AppImages.octocatImg, width: 180),
-          SizedBox(height: 10),
-          Text(
-            AppConst.stateInitial,
-            textAlign: TextAlign.center,
-            style: AppTextStyles.initialStateStyle,
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(AppImages.octocatImg, width: 180),
+            SizedBox(height: 10),
+            Text(
+              AppConst.stateInitial,
+              textAlign: TextAlign.center,
+              style: AppTextStyles.initialStateStyle,
+            ),
+          ],
+        ),
       ),
     );
   }
