@@ -1,5 +1,5 @@
 import 'package:github_api/core/error/failures.dart';
-import 'package:github_api/core/utils/store_const.dart';
+import 'package:github_api/core/utils/app_const.dart';
 import 'package:github_api/core/utils/store_state.dart';
 import 'package:github_api/features/github_search/domain/entities/repos.dart';
 import 'package:github_api/features/github_search/domain/usecases/get_user_repositories.dart';
@@ -32,9 +32,9 @@ abstract class _ReposStoreBase with Store {
   String failureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
-        return serverFailureMessage;
+        return AppConst.serverFailureMessage;
       default:
-        return serverFailureDefault;
+        return AppConst.serverFailureDefault;
     }
   }
 }
