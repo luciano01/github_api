@@ -2,7 +2,9 @@
 Retrieving user repositories with Dio package.
 
 ## Screenshots
-Soon...
+<p float="left">
+  <img width="200" src="https://github.com/luciano01/github_api/blob/master/assets/screenshots/Home.png">
+</p>
 
 ## For developers
 > To clone locally
