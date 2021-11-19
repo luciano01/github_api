@@ -3,8 +3,8 @@ import 'package:github_api/core/utils/app_colors.dart';
 import 'package:github_api/core/utils/app_const.dart';
 import 'package:github_api/core/utils/app_text_styles.dart';
 
-class LoadingState extends StatelessWidget {
-  const LoadingState({Key? key}) : super(key: key);
+class LoadingStateWidget extends StatelessWidget {
+  const LoadingStateWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

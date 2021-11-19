@@ -24,10 +24,10 @@ class ReposRepositoryImpl implements ReposRepository {
             await remoteDataSource.getUseRepositories(userName: userName);
         return Right(remoteRepos);
       } on ServerException {
-        return Left(ServerFailure());
+        return Left(ServerFailure('ServerFailure'));
       }
     } else {
-      return Left(ServerFailure());
+      return Left(ServerFailure('ServerFailure'));
     }
   }
 }

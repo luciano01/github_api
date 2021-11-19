@@ -72,7 +72,7 @@ void main() {
       // assert
       verify(mockReposRemoteDataSource.getUseRepositories(userName: tUserName));
       verifyNoMoreInteractions(mockReposRemoteDataSource);
-      expect(result, equals(Left(ServerFailure())));
+      expect(result, equals(Left(ServerFailure('ServerFailure'))));
     });
   });
 }

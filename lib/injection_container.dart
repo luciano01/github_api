@@ -4,7 +4,7 @@ import 'package:github_api/features/github_search/data/datasources/repos_remote_
 import 'package:github_api/features/github_search/data/repositories/repos_repository_impl.dart';
 import 'package:github_api/features/github_search/domain/repositories/repos_repository.dart';
 import 'package:github_api/features/github_search/domain/usecases/get_user_repositories.dart';
-import 'package:github_api/features/github_search/presentation/controller/repos_store.dart';
+import 'package:github_api/features/github_search/presentation/store/repos_store.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 

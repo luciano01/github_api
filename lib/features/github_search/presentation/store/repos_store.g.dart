@@ -12,30 +12,15 @@ mixin _$ReposStore on _ReposStoreBase, Store {
   final _$stateAtom = Atom(name: '_ReposStoreBase.state');
 
   @override
-  StoreState get state {
+  GitHubSearchState get state {
     _$stateAtom.reportRead();
     return super.state;
   }
 
   @override
-  set state(StoreState value) {
+  set state(GitHubSearchState value) {
     _$stateAtom.reportWrite(value, super.state, () {
       super.state = value;
-    });
-  }
-
-  final _$userRepositoriesAtom = Atom(name: '_ReposStoreBase.userRepositories');
-
-  @override
-  List<Repos> get userRepositories {
-    _$userRepositoriesAtom.reportRead();
-    return super.userRepositories;
-  }
-
-  @override
-  set userRepositories(List<Repos> value) {
-    _$userRepositoriesAtom.reportWrite(value, super.userRepositories, () {
-      super.userRepositories = value;
     });
   }
 
@@ -43,16 +28,29 @@ mixin _$ReposStore on _ReposStoreBase, Store {
       AsyncAction('_ReposStoreBase.getUserRepositories');
 
   @override
-  Future getUserRepositories({required String userName}) {
+  Future<GitHubSearchState> getUserRepositories({required String userName}) {
     return _$getUserRepositoriesAsyncAction
         .run(() => super.getUserRepositories(userName: userName));
+  }
+
+  final _$_ReposStoreBaseActionController =
+      ActionController(name: '_ReposStoreBase');
+
+  @override
+  dynamic setState(GitHubSearchState value) {
+    final _$actionInfo = _$_ReposStoreBaseActionController.startAction(
+        name: '_ReposStoreBase.setState');
+    try {
+      return super.setState(value);
+    } finally {
+      _$_ReposStoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
-state: ${state},
-userRepositories: ${userRepositories}
+state: ${state}
     ''';
   }
 }

@@ -3,8 +3,8 @@ import 'package:github_api/core/utils/app_const.dart';
 import 'package:github_api/core/utils/app_images.dart';
 import 'package:github_api/core/utils/app_text_styles.dart';
 
-class InitialState extends StatelessWidget {
-  const InitialState({Key? key}) : super(key: key);
+class StartStateWidget extends StatelessWidget {
+  const StartStateWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

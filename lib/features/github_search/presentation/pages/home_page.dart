@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:github_api/core/utils/store_state.dart';
-import 'package:github_api/features/github_search/domain/entities/repos.dart';
+import 'package:github_api/core/error/failures.dart';
+import 'package:github_api/features/github_search/presentation/store/repos_store.dart';
+import 'package:github_api/features/github_search/presentation/store/states/store_state.dart';
 import 'package:github_api/features/github_search/presentation/controller/form_field_controller.dart';
-import 'package:github_api/features/github_search/presentation/controller/repos_store.dart';
 import 'package:github_api/features/github_search/presentation/widgets/custom_app_bar.dart';
-import 'package:github_api/features/github_search/presentation/widgets/initial_state.dart';
-import 'package:github_api/features/github_search/presentation/widgets/loading_state.dart';
+import 'package:github_api/features/github_search/presentation/widgets/error_state_widget.dart';
+import 'package:github_api/features/github_search/presentation/widgets/start_state_widget.dart';
+import 'package:github_api/features/github_search/presentation/widgets/loading_state_widget.dart';
 import 'package:github_api/features/github_search/presentation/widgets/search_field.dart';
 import 'package:github_api/features/github_search/presentation/widgets/search_results.dart';
 
@@ -31,18 +32,20 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             child: Observer(builder: (_) {
-              List<Repos> repos = store.userRepositories;
+              var state = store.state;
 
-              if (store.state == StoreState.initial) {
-                return InitialState();
+              if (state is ErrorState) {
+                return ErrorStateWidget(
+                  message: ServerFailure('ServerFailure'),
+                );
               }
 
-              if (store.state == StoreState.loading) {
-                return LoadingState();
-              }
-
-              if (store.state == StoreState.loaded) {
-                return SearchResults(repos: repos);
+              if (state is StartState) {
+                return StartStateWidget();
+              } else if (state is LoadingState) {
+                return LoadingStateWidget();
+              } else if (state is SuccessState) {
+                return SearchResults(repos: state.list);
               } else {
                 return Container();
               }
@@ -55,13 +58,12 @@ class _HomePageState extends State<HomePage> {
             controller: formFieldController.controller,
             onPressedSearch: () {
               if (_formKey.currentState!.validate()) {
+                FocusScope.of(context).requestFocus(FocusNode());
                 store.getUserRepositories(userName: formFieldController.text);
               }
             },
             onFieldSubmitted: (value) {
-              if (_formKey.currentState!.validate()) {
-                store.getUserRepositories(userName: value);
-              }
+              FocusScope.of(context).requestFocus(FocusNode());
             },
           ),
         ],
