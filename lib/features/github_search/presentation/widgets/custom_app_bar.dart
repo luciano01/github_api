@@ -20,6 +20,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: AppColors.github,
+      elevation: 0,
       title: Row(
         children: [
           Image.asset(AppImages.githubWhiteImg, width: 30),

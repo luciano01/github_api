@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:github_api/core/error/failures.dart';
+import 'package:github_api/core/utils/app_colors.dart';
 import 'package:github_api/features/github_search/presentation/store/repos_store.dart';
 import 'package:github_api/features/github_search/presentation/store/states/store_state.dart';
 import 'package:github_api/features/github_search/presentation/controller/form_field_controller.dart';
@@ -30,6 +31,24 @@ class _HomePageState extends State<HomePage> {
       appBar: CustomAppBar(),
       body: Column(
         children: [
+          Container(
+            color: AppColors.github,
+            child: SearchField(
+              formKey: _formKey,
+              autovalidateMode: formFieldController.autovalidateMode,
+              validator: formFieldController.validateUserName,
+              controller: formFieldController.controller,
+              onPressedSearch: () {
+                if (_formKey.currentState!.validate()) {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  store.getUserRepositories(userName: formFieldController.text);
+                }
+              },
+              onFieldSubmitted: (value) {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+            ),
+          ),
           Expanded(
             child: Observer(builder: (_) {
               var state = store.state;
@@ -50,21 +69,6 @@ class _HomePageState extends State<HomePage> {
                 return Container();
               }
             }),
-          ),
-          SearchField(
-            formKey: _formKey,
-            autovalidateMode: formFieldController.autovalidateMode,
-            validator: formFieldController.validateUserName,
-            controller: formFieldController.controller,
-            onPressedSearch: () {
-              if (_formKey.currentState!.validate()) {
-                FocusScope.of(context).requestFocus(FocusNode());
-                store.getUserRepositories(userName: formFieldController.text);
-              }
-            },
-            onFieldSubmitted: (value) {
-              FocusScope.of(context).requestFocus(FocusNode());
-            },
           ),
         ],
       ),

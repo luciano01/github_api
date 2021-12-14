@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:github_api/core/utils/app_colors.dart';
 import 'package:github_api/core/utils/app_const.dart';
 
 class SearchField extends StatelessWidget {
@@ -25,35 +28,66 @@ class SearchField extends StatelessWidget {
       autovalidateMode: autovalidateMode,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 8,
-          vertical: 8,
+          horizontal: 16,
+          vertical: 16,
         ),
         child: Row(
           children: [
             Expanded(
               child: TextFormField(
+                cursorColor: AppColors.white,
                 controller: controller,
                 validator: validator,
                 decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.white,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.white,
+                    ),
+                  ),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
+                    borderSide: BorderSide(
+                      color: AppColors.white,
+                    ),
                   ),
                   contentPadding: EdgeInsets.symmetric(
                     vertical: 15,
                     horizontal: 15,
                   ),
-                  prefixIcon: Icon(Icons.person_outline),
+                  prefixIcon: Icon(
+                    Icons.person_outline,
+                    color: AppColors.white,
+                  ),
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.close),
+                    icon: Icon(
+                      Icons.close,
+                      color: AppColors.white,
+                    ),
                     onPressed: controller.clear,
                   ),
                   hintText: AppConst.textFormFieldHint,
+                  hintStyle: TextStyle(
+                    color: AppColors.white,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                style: TextStyle(
+                  color: AppColors.white,
                 ),
                 onFieldSubmitted: onFieldSubmitted,
               ),
             ),
-            IconButton(
-              icon: Icon(Icons.search),
+            TextButton(
+              child: Text(
+                'Search'.toUpperCase(),
+                style: TextStyle(
+                  color: AppColors.white,
+                ),
+              ),
               onPressed: onPressedSearch,
             ),
           ],
